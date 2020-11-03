@@ -4,8 +4,10 @@ import {
   fetchContacts,
   fetchContactsSuccess,
   FETCH_CONTACTS,
+  SAVE_CHANGES,
+  DELETE_CONTACT,
 } from 'ducks/contacts/actions';
-import { START_SEARCH, endSearch } from 'ducks/search/actions';
+import { START_SEARCH, endSearch, startSearch } from 'ducks/search/actions';
 import {
   fetchContactsFromServer,
   compareNameWithString,
@@ -48,6 +50,39 @@ export const middleware = ({ dispatch, getState }) => next => action => {
         [],
       );
       dispatch(endSearch(foundContactIds));
+      break;
+    }
+    case SAVE_CHANGES: {
+      const { id, data } = action;
+      const {
+        contacts: { contacts },
+        search: { searchString },
+      } = getState();
+      localStorage.setItem(
+        'contacts',
+        JSON.stringify(Object.values({ ...contacts, [id]: data })),
+      );
+      dispatch(startSearch(searchString));
+      break;
+    }
+    case DELETE_CONTACT: {
+      const {
+        contacts: { contacts },
+        search: { searchString },
+      } = getState();
+      const { id } = action;
+      const updatedContacts = Object.keys(contacts)
+        .filter(contactId => contactId !== id)
+        .reduce((acc, contactId) => {
+          acc[contactId] = contacts[contactId];
+          return acc;
+        }, {});
+      localStorage.setItem(
+        'contacts',
+        JSON.stringify(Object.values(updatedContacts)),
+      );
+      dispatch(startSearch(searchString));
+      break;
     }
   }
 };

@@ -2,13 +2,15 @@
  * prepares contact data from server for handy usage
  * (id to string, adds firstLetterOfName field)
  */
-export const prepareContact = ({ id, name, company, ...contact }) => {
+export const prepareContact = ({ id, name, company, address, ...contact }) => {
   return {
     ...contact,
     name,
+    address,
     id: `${id}`,
-    company: company.name,
+    company: company.name || company,
     firstLetterOfName: name.charAt(0).toUpperCase(),
+    city: address.city,
   };
 };
 

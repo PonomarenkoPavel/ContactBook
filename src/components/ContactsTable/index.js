@@ -10,8 +10,13 @@ import { useStyles } from './styles';
  * Displays contact table
  * @param contactsByLetters - found contacts object grouped by first letter of contact name
  * @param size - screen size
+ * @param handleClick - callback for click on table row
  */
-export const ContactsTableComponent = ({ contactsByLetters, size }) => {
+export const ContactsTableComponent = ({
+  contactsByLetters,
+  size,
+  handleClick,
+}) => {
   const classes = useStyles();
 
   return (
@@ -26,6 +31,7 @@ export const ContactsTableComponent = ({ contactsByLetters, size }) => {
                 letter={letter}
                 contacts={contacts}
                 size={size}
+                handleClick={handleClick}
               />
             ))}
           </TableBody>
@@ -37,5 +43,6 @@ export const ContactsTableComponent = ({ contactsByLetters, size }) => {
 
 ContactsTableComponent.propTypes = {
   contactsByLetters: PropTypes.object.isRequired,
+  handleClick: PropTypes.func.isRequired,
   size: SIZE_VALUES,
 };

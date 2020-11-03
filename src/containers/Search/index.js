@@ -1,10 +1,10 @@
 import React, { useState, useCallback, useRef } from 'react';
-import { SearchComponent } from 'components/Search';
+import { InputComponent } from 'components/Input';
 import { useDispatch } from 'react-redux';
 import { startSearch } from 'ducks/search/actions';
 
 /**
- * Search line container
+ * Displays search line
  */
 export const Search = () => {
   const [searchString, setSearchString] = useState('');
@@ -26,5 +26,12 @@ export const Search = () => {
     [setSearchString],
   );
 
-  return <SearchComponent value={searchString} handleChange={handleChange} />;
+  return (
+    <InputComponent
+      value={searchString}
+      handleChange={handleChange}
+      id="search"
+      placeholder="Search"
+    />
+  );
 };

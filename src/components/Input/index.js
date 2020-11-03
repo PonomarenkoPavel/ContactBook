@@ -4,17 +4,16 @@ import PropTypes from 'prop-types';
 import { useStyles } from './styles';
 
 /**
- * Displays search line
- * @param value - search string
- * @param handleChange - callback to change search string
+ * Displays input component
+ * @param value - value for input
+ * @param handleChange - callback to change value
+ * @param props - other props for input
  */
-export const SearchComponent = ({ handleChange, value }) => {
+export const InputComponent = ({ handleChange, value, ...props }) => {
   const classes = useStyles();
 
   return (
     <Input
-      id="search"
-      placeholder="Search"
       fullWidth
       disableUnderline
       classes={{
@@ -23,11 +22,12 @@ export const SearchComponent = ({ handleChange, value }) => {
       }}
       value={value}
       onChange={handleChange}
+      {...props}
     />
   );
 };
 
-SearchComponent.propTypes = {
+InputComponent.propTypes = {
   handleChange: PropTypes.func.isRequired,
   value: PropTypes.string.isRequired,
 };

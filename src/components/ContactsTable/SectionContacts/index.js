@@ -11,8 +11,9 @@ import { useStyles } from './styles';
  * @param letter - first letter of contact names
  * @param contacts - array of contacts
  * @param size - screen size
+ * @param handleClick - callback for click on table row
  */
-export const SectionContacts = ({ letter, contacts, size }) => {
+export const SectionContacts = ({ letter, contacts, size, handleClick }) => {
   const classes = useStyles();
   const tableFields = tableFieldsBySize[size] || tableFieldsBySize.large;
 
@@ -22,7 +23,12 @@ export const SectionContacts = ({ letter, contacts, size }) => {
         <TableCell colSpan={tableFields.length}>{letter}</TableCell>
       </TableRow>
       {contacts.map(contact => (
-        <ContactsTableRow key={contact.id} contact={contact} size={size} />
+        <ContactsTableRow
+          key={contact.id}
+          contact={contact}
+          size={size}
+          handleClick={handleClick}
+        />
       ))}
     </>
   );
@@ -31,5 +37,6 @@ export const SectionContacts = ({ letter, contacts, size }) => {
 SectionContacts.propTypes = {
   letter: PropTypes.string.isRequired,
   contacts: PropTypes.arrayOf(PropTypes.shape(CONTACT_SHAPE)).isRequired,
+  handleClick: PropTypes.func.isRequired,
   size: SIZE_VALUES,
 };

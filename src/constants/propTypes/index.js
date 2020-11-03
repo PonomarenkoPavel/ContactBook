@@ -14,6 +14,7 @@ export const CONTACT_SHAPE = {
   }),
   phone: PropTypes.string.isRequired,
   company: PropTypes.string.isRequired,
+  city: PropTypes.string.isRequired,
 };
 
 /**

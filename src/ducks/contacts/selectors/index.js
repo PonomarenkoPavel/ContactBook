@@ -1,5 +1,6 @@
 import { createSelector } from 'reselect';
 import { selectFoundContactIds } from 'ducks/search/selectors';
+import { selectContactId } from 'ducks/modals/selectors';
 
 /**
  * Selects all contacts from store
@@ -26,4 +27,12 @@ export const selectFoundContactsbyLetters = createSelector(
       }
       return acc;
     }, {}),
+);
+
+/**
+ * Selects contact that is currently being edited
+ */
+export const selectCurrentContact = createSelector(
+  [selectContactId, selectContacts],
+  (contactId, contacts) => contacts[contactId],
 );
