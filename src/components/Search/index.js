@@ -7,9 +7,8 @@ import { useStyles } from './styles';
  * Displays search line
  * @param value - search string
  * @param handleChange - callback to change search string
- * @param handleKeyPress - callback to handle key press on input
  */
-export const SearchComponent = ({ handleChange, value, handleKeyPress }) => {
+export const SearchComponent = ({ handleChange, value }) => {
   const classes = useStyles();
 
   return (
@@ -24,7 +23,6 @@ export const SearchComponent = ({ handleChange, value, handleKeyPress }) => {
       }}
       value={value}
       onChange={handleChange}
-      onKeyPress={handleKeyPress}
     />
   );
 };
@@ -32,5 +30,4 @@ export const SearchComponent = ({ handleChange, value, handleKeyPress }) => {
 SearchComponent.propTypes = {
   handleChange: PropTypes.func.isRequired,
   value: PropTypes.string.isRequired,
-  handleKeyPress: PropTypes.func.isRequired,
 };
